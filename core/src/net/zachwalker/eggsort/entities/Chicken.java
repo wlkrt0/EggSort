@@ -9,9 +9,9 @@ import net.zachwalker.eggsort.util.Enums;
 
 public class Chicken {
 
-    Vector2 position;
-    long createdTime;
-    Enums.ChickenColor chickenColor;
+    private Vector2 position;
+    private long createdTime;
+    private Enums.ChickenColor chickenColor;
 
     public Chicken(Vector2 position, Enums.ChickenColor chickenColor) {
         this.position = new Vector2(position);

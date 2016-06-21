@@ -83,7 +83,7 @@ public class EggSortScreen extends ScreenAdapter {
         preferences = Gdx.app.getPreferences(Constants.PREFERENCES_FILE_NAME);
         highScore = preferences.getLong(Constants.PREF_KEY_HIGH_SCORE);
         highLevel = preferences.getInteger(Constants.PREF_KEY_HIGH_LEVEL);
-        Assets.singleton.sounds.playSound(Assets.singleton.sounds.newLevel);
+        Assets.singleton.sounds.playMusic(Assets.singleton.sounds.newLevel);
         gotoLevel(level);
     }
 
@@ -96,7 +96,7 @@ public class EggSortScreen extends ScreenAdapter {
                 removeEggs(delta);
                 break;
             case GOTO_NEXT_LEVEL:
-                Assets.singleton.sounds.playSound(Assets.singleton.sounds.newLevel);
+                Assets.singleton.sounds.playMusic(Assets.singleton.sounds.newLevel);
                 gotoLevel(level + 1);
                 saveGame(); //save AFTER we increment the level
                 break;
@@ -171,7 +171,7 @@ public class EggSortScreen extends ScreenAdapter {
     }
 
     public void startPowerup() {
-        Assets.singleton.sounds.playSound(Assets.singleton.sounds.powerup);
+        Assets.singleton.sounds.playMusic(Assets.singleton.sounds.powerup);
         lastPowerupStartedTime = TimeUtils.nanoTime();
     }
 
@@ -270,6 +270,8 @@ public class EggSortScreen extends ScreenAdapter {
                 eggs.removeValue(egg, false);
                 combo = 0;
                 currentScore = Math.max(0, currentScore - 25);
+                //if the players score is now zero, end the game
+                if (currentScore == 0) gameState = Enums.GameState.GAME_OVER;
 
                 //decrement ballcount on the bucket that matches the fellthru enum and end the game if it's below empty TODO refactor
                 switch (egg.fellThru) {

@@ -37,6 +37,27 @@ public final class DrawingHelpers {
         );
     }
 
+    public static void drawSpriteRotated(SpriteBatch batch, TextureRegion textureRegion, Vector2 position) {
+        batch.draw(
+                textureRegion.getTexture(),
+                position.x,
+                position.y,
+                0.0f,
+                0.0f,
+                textureRegion.getRegionWidth(),
+                textureRegion.getRegionHeight(),
+                1.0f,
+                1.0f,
+                90.0f,
+                textureRegion.getRegionX(),
+                textureRegion.getRegionY(),
+                textureRegion.getRegionWidth(),
+                textureRegion.getRegionHeight(),
+                false,
+                false
+        );
+    }
+
     public static float secondsSince(long nanoTimeStamp) {
         return MathUtils.nanoToSec * (TimeUtils.nanoTime() - nanoTimeStamp);
     }

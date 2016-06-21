@@ -68,11 +68,11 @@ public class Egg {
     /* each new ball gets a random type. regular balls are equal probability. powerup is rare. */
     private void setEggType() {
         float randomNumber = MathUtils.random();
-        if (randomNumber < 0.04f) {
+        if (randomNumber < 0.01f) {
             eggType = Enums.EggType.POWERUP;
-        } else if (randomNumber >= 0.04f && randomNumber < 0.36f) {
+        } else if (randomNumber >= 0.01f && randomNumber < 0.34f) {
             eggType = Enums.EggType.WHITE;
-        } else if (randomNumber >= 0.36f && randomNumber < 0.68f) {
+        } else if (randomNumber >= 0.34f && randomNumber < 0.67f) {
             eggType = Enums.EggType.BROWN;
         } else {
             eggType = Enums.EggType.CHICK;
@@ -95,6 +95,7 @@ public class Egg {
         position.mulAdd(velocity, delta);
         //automate the valves if a powerup is active
         if (eggSortScreen.isPowerupActive()) automateValves(leftValve, rightValve);
+        //automateValves(leftValve, rightValve);
         //start falling if the ball is on top of an open valve or at the end of the ramp
         if (fellThroughGap(leftValve, rightValve)) {
             eggState = Enums.EggState.FALLING;
@@ -118,12 +119,12 @@ public class Egg {
 
     private boolean fellThroughGap(Valve leftValve, Valve rightValve) {
         //if it fell through the left valve
-        if (overLeftValve() && leftValve.valveState == Enums.ValveState.CLOSED) {
+        if (overLeftValve() && leftValve.valveState == Enums.ValveState.OPEN) {
             fellThru = Enums.EggFellThru.LEFT_VALVE;
             return true;
         }
         //if it fell through the right valve
-        else if (overRightValve() && rightValve.valveState == Enums.ValveState.CLOSED) {
+        else if (overRightValve() && rightValve.valveState == Enums.ValveState.OPEN) {
             fellThru = Enums.EggFellThru.RIGHT_VALVE;
             return true;
         }
@@ -153,15 +154,15 @@ public class Egg {
         //only switch valves if the ball is sitting on top of a valve AND the valve is in the wrong position
         if (overLeftValve()) {
             if (eggType.equals(Enums.EggType.WHITE)) {
-                if (leftValve.valveState == Enums.ValveState.OPEN) leftValve.switchValveState();
-            } else {
                 if (leftValve.valveState == Enums.ValveState.CLOSED) leftValve.switchValveState();
+            } else {
+                if (leftValve.valveState == Enums.ValveState.OPEN) leftValve.switchValveState();
             }
         } else if (overRightValve()) {
             if (eggType.equals(Enums.EggType.BROWN)) {
-                if (rightValve.valveState == Enums.ValveState.OPEN) rightValve.switchValveState();
-            } else {
                 if (rightValve.valveState == Enums.ValveState.CLOSED) rightValve.switchValveState();
+            } else {
+                if (rightValve.valveState == Enums.ValveState.OPEN) rightValve.switchValveState();
             }
         }
     }

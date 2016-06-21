@@ -459,9 +459,37 @@ egg_powerup
   orig: 27, 34
   offset: 0, 0
   index: 2
-egg_white
+egg_powerup
   rotate: false
   xy: 749, 104
+  size: 27, 34
+  orig: 27, 34
+  offset: 0, 0
+  index: 3
+egg_powerup
+  rotate: false
+  xy: 778, 140
+  size: 27, 34
+  orig: 27, 34
+  offset: 0, 0
+  index: 4
+egg_powerup
+  rotate: false
+  xy: 749, 68
+  size: 27, 34
+  orig: 27, 34
+  offset: 0, 0
+  index: 5
+egg_powerup
+  rotate: false
+  xy: 728, 32
+  size: 27, 34
+  orig: 27, 34
+  offset: 0, 0
+  index: 6
+egg_white
+  rotate: false
+  xy: 778, 104
   size: 27, 34
   orig: 27, 34
   offset: 0, 0

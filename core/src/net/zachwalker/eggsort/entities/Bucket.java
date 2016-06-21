@@ -24,9 +24,8 @@ public class Bucket {
         this.eggType = eggType;
     }
 
-    //no update method on the Buckets, since they don't move and are updated by Eggs
-
     public void render(SpriteBatch batch) {
+        //note that the order in which these sprites are drawn is important (z-index)
         switch(eggType) {
             case WHITE:
                 DrawingHelpers.drawSprite(batch, Assets.singleton.images.bucketLeft.get(numEggsToShow), position);
@@ -40,23 +39,22 @@ public class Bucket {
                 break;
             case CHICK:
                 DrawingHelpers.drawSprite(batch, Assets.singleton.images.bucketRight.get(numEggsToShow), position);
-                DrawingHelpers.drawSprite(batch, Assets.singleton.images.bucketsToFill.get(bucketsToFill), Constants.BUCKETS_FILLED_RIGHT_POSITION);
-                DrawingHelpers.drawSprite(batch, Assets.singleton.images.bucketsFilled.get(bucketsFilled), Constants.BUCKETS_FILLED_RIGHT_POSITION);
+                //same sprite as for Left/White and Middle/Brown but rotated 90deg
+                DrawingHelpers.drawSpriteRotated(batch, Assets.singleton.images.bucketsToFill.get(bucketsToFill), Constants.BUCKETS_FILLED_RIGHT_POSITION);
+                DrawingHelpers.drawSpriteRotated(batch, Assets.singleton.images.bucketsFilled.get(bucketsFilled), Constants.BUCKETS_FILLED_RIGHT_POSITION);
                 break;
         }
     }
 
-    /** Increments this bucket's eggs caught counter. Returns true if it's now full. */
-    public boolean caughtEgg() {
+    /** Increments this bucket's eggs caught counter. */
+    public void caughtEgg() {
         if (caughtEggs >= caughtEggsGoal - 1) {
             caughtEggs = caughtEggsGoal;
             updateTextures();
             Assets.singleton.sounds.playSound(Assets.singleton.sounds.full);
-            return true;
         } else {
             caughtEggs += 1;
             updateTextures();
-            return false;
         }
     }
 

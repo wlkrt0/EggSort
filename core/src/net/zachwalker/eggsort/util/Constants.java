@@ -18,35 +18,35 @@ public final class Constants {
     public static final float GRAVITY = 14.0f;
 
     public static final float LEVEL_START_DELAY = 8.0f;
-    public static final float POWERUP_DURATION = 13.5f;
+    public static final float POWERUP_DURATION = 9.0f;
 
-    public static final float EGG_SIZE = 16.0f;
+    public static final float EGG_SIZE = 13.0f;
     public static final float EGG_SPEED = 80.0f;
     public static final Vector2 EGG_SPAWN = new Vector2(110.0f, 42.0f);
     public static final double EGG_SPAWN_INTERVAL_MIN = 0.5f;
 
     public static final float CHUTE_HEIGHT = 404.0f;
 
-    public static final float RAMP_END = 744.0f;
+    public static final float RAMP_END = 747.0f;
 
     public static final Vector2 BUTTON_ROTATE_LEFT_POSITION = new Vector2(283.0f, 36.0f);
     public static final Vector2 BUTTON_ROTATE_RIGHT_POSITION = new Vector2(522.0f, 36.0f);
     public static final Vector2 BUTTON_GOTO_LEVEL_POSITION = new Vector2(822.0f, 363.0f);
     public static final Vector2 BUTTON_MUTE_POSITION = new Vector2(822.0f, 295.0f);
 
-    public static final Vector2 VALVE_LEFT_POSITION = new Vector2(320.0f, 394.0f);
-    public static final Vector2 VALVE_RIGHT_POSITION = new Vector2(556.0f, 394.0f);
+    public static final Vector2 VALVE_LEFT_POSITION = new Vector2(320.0f, 353.0f);
+    public static final Vector2 VALVE_RIGHT_POSITION = new Vector2(561.0f, 353.0f);
     public static final float VALVE_WIDTH = EGG_SIZE * 2.0f;
 
     public static final Vector2 CHICKEN_WHITE_POSITION = new Vector2(10.0f, 124.0f);
     public static final Vector2 CHICKEN_BROWN_POSITION = new Vector2(10.0f, 32.0f);
 
     public static final Vector2 BUCKET_LEFT_POSITION = new Vector2(280.0f, 189.0f);
-    public static final Vector2 BUCKETS_FILLED_LEFT_POSITION = new Vector2(313.0f, 196.0f);
+    public static final Vector2 BUCKETS_FILLED_LEFT_POSITION = new Vector2(309.0f, 196.0f);
     public static final Vector2 BUCKET_MIDDLE_POSITION = new Vector2(520.0f, 189.0f);
-    public static final Vector2 BUCKETS_FILLED_MIDDLE_POSITION = new Vector2(552.0f, 196.0f);
+    public static final Vector2 BUCKETS_FILLED_MIDDLE_POSITION = new Vector2(549.0f, 196.0f);
     public static final Vector2 BUCKET_RIGHT_POSITION = new Vector2(732.0f, 136.0f);
-    public static final Vector2 BUCKETS_FILLED_RIGHT_POSITION = new Vector2(690.0f, 85.0f);
+    public static final Vector2 BUCKETS_FILLED_RIGHT_POSITION = new Vector2(726.0f, 143.0f);
     public static final float BUCKET_TOP = 210f;
     public static final int BUCKET_GOAL_PER_LEVEL = 2;
 
@@ -57,6 +57,7 @@ public final class Constants {
     public static final String LEVEL_LABEL = "LEVEL ";
     public static final String LABEL_COMBO = "x";
 
+    public static final String SOUND_FARM_AMBIENCE = "farm_ambience.mp3";
     public static final String SOUND_NEW_EGG = "newegg.wav";
     public static final String SOUND_VALVE = "valve.wav";
     public static final String SOUND_MISSED = "missed.wav";
@@ -82,7 +83,7 @@ public final class Constants {
     public static final String TEXTURE_EGG_BROWN = "egg_brown";
     public static final String TEXTURE_EGG_CHICK = "egg_chick";
     public static final String TEXTURES_EGG_POWERUP = "egg_powerup";
-    public static final float POWERUP_ANIMATION_DELAY = 0.05f;
+    public static final float POWERUP_ANIMATION_DELAY = 0.08f;
     public static final String TEXTURE_VALVE_LEFT_OPEN = "valve_left_open";
     public static final String TEXTURE_VALVE_LEFT_CLOSED = "valve_left_closed";
     public static final String TEXTURE_VALVE_RIGHT_OPEN = "valve_right_open";

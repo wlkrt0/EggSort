@@ -96,14 +96,14 @@ public class Buttons extends InputAdapter  {
         }
 
         //draw left "rotate valve" button
-        if (leftValve.valveState == Enums.ValveState.CLOSED) {
+        if (leftValve.valveState == Enums.ValveState.OPEN) {
             DrawingHelpers.drawSprite(batch, Assets.singleton.images.buttonWhiteDown, buttonRotateLeft);
         } else {
             DrawingHelpers.drawSprite(batch, Assets.singleton.images.buttonWhiteRight, buttonRotateLeft);
         }
 
         //draw right "rotate valve" button
-        if (rightValve.valveState == Enums.ValveState.CLOSED) {
+        if (rightValve.valveState == Enums.ValveState.OPEN) {
             DrawingHelpers.drawSprite(batch, Assets.singleton.images.buttonBrownDown, buttonRotateRight);
         } else {
             DrawingHelpers.drawSprite(batch, Assets.singleton.images.buttonBrownRight, buttonRotateRight);

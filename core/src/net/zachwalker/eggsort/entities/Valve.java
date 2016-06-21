@@ -9,14 +9,14 @@ import net.zachwalker.eggsort.util.Enums;
 
 public class Valve {
 
-    Vector2 position;
+    private Vector2 position;
     Enums.ValveState valveState;
     private Enums.EggType eggType;
 
     public Valve(Vector2 position, Enums.EggType eggType) {
         this.position = new Vector2(position);
         this.eggType = eggType;
-        valveState = Enums.ValveState.OPEN;
+        valveState = Enums.ValveState.CLOSED;
     }
 
     public void render(SpriteBatch batch) {

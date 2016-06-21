@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -26,13 +27,15 @@ public class Assets implements Disposable, AssetErrorListener{
     public void init() {
         manager = new AssetManager();
         manager.setErrorListener(this);
+        manager.load(Constants.SOUND_FARM_AMBIENCE, Music.class);
+        manager.load(Constants.SOUND_NEW_LEVEL, Music.class);
+        manager.load(Constants.SOUND_POWERUP, Music.class);
         manager.load(Constants.SOUND_NEW_EGG, Sound.class);
         manager.load(Constants.SOUND_VALVE, Sound.class);
         manager.load(Constants.SOUND_MISSED, Sound.class);
         manager.load(Constants.SOUND_GAME_OVER, Sound.class);
         manager.load(Constants.SOUND_FULL, Sound.class);
-        manager.load(Constants.SOUND_NEW_LEVEL, Sound.class);
-        manager.load(Constants.SOUND_POWERUP, Sound.class);
+
         manager.load(Constants.SOUND_BUTTON, Sound.class);
         for (int i = 0; i < Constants.SOUND_CAUGHT_COUNT; i++) {
             manager.load(
@@ -61,41 +64,59 @@ public class Assets implements Disposable, AssetErrorListener{
     public class Sounds {
 
         private boolean soundMuted;
+        public Music farmAmbience;
+        public Music newLevel;
+        public Music powerup;
         public Sound newEgg;
         public Sound valve;
         public Sound missed;
         public Sound gameOver;
         public Sound full;
-        public Sound newLevel;
-        public Sound powerup;
         public Sound button;
         public Array<Sound> caught;
 
         public Sounds(AssetManager manager) {
+            farmAmbience = manager.get(Constants.SOUND_FARM_AMBIENCE, Music.class);
+            newLevel = manager.get(Constants.SOUND_NEW_LEVEL, Music.class);
+            powerup = manager.get(Constants.SOUND_POWERUP, Music.class);
             newEgg = manager.get(Constants.SOUND_NEW_EGG, Sound.class);
             valve = manager.get(Constants.SOUND_VALVE, Sound.class);
             missed = manager.get(Constants.SOUND_MISSED, Sound.class);
             gameOver = manager.get(Constants.SOUND_GAME_OVER, Sound.class);
             full = manager.get(Constants.SOUND_FULL, Sound.class);
-            newLevel = manager.get(Constants.SOUND_NEW_LEVEL, Sound.class);
-            powerup = manager.get(Constants.SOUND_POWERUP, Sound.class);
             button = manager.get(Constants.SOUND_BUTTON, Sound.class);
-
             caught = new Array<Sound>();
             for (int i = 0; i < Constants.SOUND_CAUGHT_COUNT; i++) {
                 caught.insert(i, manager.get(
                         Constants.SOUND_CAUGHT_PREFIX + Integer.toString(i + 1) + Constants.SOUND_CAUGHT_SUFFIX,
                         Sound.class));
             }
+            farmAmbience.setLooping(true);
+            farmAmbience.setVolume(0.5f);
+            farmAmbience.play();
+
         }
 
-        public void playSound(Sound sound)
-        {
+        public void playSound(Sound sound) {
             if(!soundMuted) sound.play();
+        }
+
+        public void playMusic(Music music) {
+            if(!soundMuted) {
+                music.stop();
+                music.play();
+            }
         }
 
         public void toggleMute() {
             soundMuted = !soundMuted;
+            if (soundMuted) {
+                powerup.stop();
+                newLevel.stop();
+                farmAmbience.stop();
+            } else {
+                farmAmbience.play();
+            }
         }
 
         public boolean isMuted() {
