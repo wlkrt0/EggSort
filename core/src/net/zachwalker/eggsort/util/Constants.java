@@ -25,7 +25,7 @@ public final class Constants {
     public static final Vector2 EGG_SPAWN = new Vector2(110.0f, 42.0f);
     public static final double EGG_SPAWN_INTERVAL_MIN = 0.5f;
 
-    public static final float CHUTE_HEIGHT = 400.0f;
+    public static final float CHUTE_HEIGHT = 404.0f;
 
     public static final float RAMP_END = 744.0f;
 
@@ -42,8 +42,11 @@ public final class Constants {
     public static final Vector2 CHICKEN_BROWN_POSITION = new Vector2(10.0f, 32.0f);
 
     public static final Vector2 BUCKET_LEFT_POSITION = new Vector2(280.0f, 189.0f);
+    public static final Vector2 BUCKETS_FILLED_LEFT_POSITION = new Vector2(313.0f, 196.0f);
     public static final Vector2 BUCKET_MIDDLE_POSITION = new Vector2(520.0f, 189.0f);
+    public static final Vector2 BUCKETS_FILLED_MIDDLE_POSITION = new Vector2(552.0f, 196.0f);
     public static final Vector2 BUCKET_RIGHT_POSITION = new Vector2(732.0f, 136.0f);
+    public static final Vector2 BUCKETS_FILLED_RIGHT_POSITION = new Vector2(690.0f, 85.0f);
     public static final float BUCKET_TOP = 210f;
     public static final int BUCKET_GOAL_PER_LEVEL = 2;
 
@@ -78,7 +81,8 @@ public final class Constants {
     public static final String TEXTURE_EGG_WHITE = "egg_white";
     public static final String TEXTURE_EGG_BROWN = "egg_brown";
     public static final String TEXTURE_EGG_CHICK = "egg_chick";
-    public static final String TEXTURE_EGG_POWERUP = "egg_powerup";
+    public static final String TEXTURES_EGG_POWERUP = "egg_powerup";
+    public static final float POWERUP_ANIMATION_DELAY = 0.05f;
     public static final String TEXTURE_VALVE_LEFT_OPEN = "valve_left_open";
     public static final String TEXTURE_VALVE_LEFT_CLOSED = "valve_left_closed";
     public static final String TEXTURE_VALVE_RIGHT_OPEN = "valve_right_open";
@@ -86,8 +90,9 @@ public final class Constants {
     public static final String TEXTURES_BUCKET_LEFT = "bucket_left";
     public static final String TEXTURES_BUCKET_MIDDLE = "bucket_middle";
     public static final String TEXTURES_BUCKET_RIGHT = "bucket_right";
+    public static final String TEXTURES_BUCKETS_FILLED = "buckets_filled";
+    public static final String TEXTURES_BUCKETS_TO_FILL = "buckets_to_fill";
     public static final String TEXTURES_CHICKEN_WHITE = "chicken_white";
     public static final String TEXTURES_CHICKEN_BROWN = "chicken_brown";
     public static final float CHICKEN_ANIMATION_DELAY = 0.5f;
-
 }

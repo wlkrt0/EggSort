@@ -1,6 +1,6 @@
 adjust level difficulty - eliminate 3 and 4, increase 2's difficulty
 add visual indicator for powerup duration
 consider refactoring the methods that add/remove balls from the buckets AND report full/empty into two separate methods
-animate powerup egg
-
-TOP PRIORITY - vary goals by level (goal = level * 2)
+stop sounds from playing overtop of one another
+improve sounds
+rotate chick dots

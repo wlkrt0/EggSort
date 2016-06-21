@@ -61,11 +61,11 @@ public class ScoreText {
         );
 
         //if the player has 2x or more combos, show the combo text with the current multiplier
+        if (combo != previousCombo) {
+            previousCombo = combo;
+            comboVisibleTime = TimeUtils.nanoTime();
+        }
         if (combo >= 2) {
-            if (combo > previousCombo) {
-                previousCombo = combo;
-                comboVisibleTime = TimeUtils.nanoTime();
-            }
             float alpha = 2.0f - Interpolation.pow2In.apply(DrawingHelpers.secondsSince(comboVisibleTime));
             font.setColor(Constants.LABEL_COLOR.r, Constants.LABEL_COLOR.g, Constants.LABEL_COLOR.b, alpha);
             font.draw(

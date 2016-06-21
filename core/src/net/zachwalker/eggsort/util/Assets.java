@@ -118,10 +118,12 @@ public class Assets implements Disposable, AssetErrorListener{
         public AtlasRegion eggWhite;
         public AtlasRegion eggBrown;
         public AtlasRegion eggChick;
-        public AtlasRegion eggPowerup;
+        public Animation eggPowerup;
         public Array<AtlasRegion> bucketLeft;
         public Array<AtlasRegion> bucketMiddle;
         public Array<AtlasRegion> bucketRight;
+        public Array<AtlasRegion> bucketsFilled;
+        public Array<AtlasRegion> bucketsToFill;
         public AtlasRegion valveLeftOpen;
         public AtlasRegion valveLeftClosed;
         public AtlasRegion valveRightOpen;
@@ -152,12 +154,16 @@ public class Assets implements Disposable, AssetErrorListener{
             eggWhite = atlas.findRegion(Constants.TEXTURE_EGG_WHITE);
             eggBrown = atlas.findRegion(Constants.TEXTURE_EGG_BROWN);
             eggChick = atlas.findRegion(Constants.TEXTURE_EGG_CHICK);
-            eggPowerup = atlas.findRegion(Constants.TEXTURE_EGG_POWERUP);
+            //note use of findRegions (with an s) below ---------------------------------------
+            eggPowerup = new Animation(Constants.POWERUP_ANIMATION_DELAY,
+                    atlas.findRegions(Constants.TEXTURES_EGG_POWERUP));
 
-            //note use of findRegions (with an s) below
             bucketLeft = atlas.findRegions(Constants.TEXTURES_BUCKET_LEFT);
             bucketMiddle = atlas.findRegions(Constants.TEXTURES_BUCKET_MIDDLE);
             bucketRight = atlas.findRegions(Constants.TEXTURES_BUCKET_RIGHT);
+
+            bucketsFilled = atlas.findRegions(Constants.TEXTURES_BUCKETS_FILLED);
+            bucketsToFill = atlas.findRegions(Constants.TEXTURES_BUCKETS_TO_FILL);
 
             chickenWhite = new Animation(Constants.CHICKEN_ANIMATION_DELAY,
                     atlas.findRegions(Constants.TEXTURES_CHICKEN_WHITE));

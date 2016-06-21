@@ -4,6 +4,8 @@ package net.zachwalker.eggsort.entities;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.TimeUtils;
+
 import net.zachwalker.eggsort.EggSortScreen;
 import net.zachwalker.eggsort.util.Assets;
 import net.zachwalker.eggsort.util.Constants;
@@ -18,6 +20,7 @@ public class Egg {
     private Vector2 position;
     private Vector2 velocity;
     private EggSortScreen eggSortScreen;
+    private long createdTime;
 
     //note that we are passing the BallSortScreen class to the ball constructor so that balls can get and set powerup status
     public Egg(EggSortScreen eggSortScreen) {
@@ -27,6 +30,7 @@ public class Egg {
         position = new Vector2(Constants.EGG_SPAWN);
         velocity = new Vector2();
         eggState = Enums.EggState.CHUTE;
+        createdTime = TimeUtils.nanoTime();
     }
 
     public void update(float delta, Valve leftValve, Valve rightValve) {
@@ -44,6 +48,7 @@ public class Egg {
     }
 
     public void render(SpriteBatch batch) {
+        float elapsedTime = DrawingHelpers.secondsSince(createdTime);
         switch(eggType) {
             case WHITE:
                 DrawingHelpers.drawSprite(batch, Assets.singleton.images.eggWhite, position);
@@ -55,7 +60,7 @@ public class Egg {
                 DrawingHelpers.drawSprite(batch, Assets.singleton.images.eggChick, position);
                 break;
             case POWERUP:
-                DrawingHelpers.drawSprite(batch, Assets.singleton.images.eggPowerup, position);
+                DrawingHelpers.drawSprite(batch, Assets.singleton.images.eggPowerup.getKeyFrame(elapsedTime, true), position);
                 break;
         }
     }

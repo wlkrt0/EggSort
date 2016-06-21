@@ -64,9 +64,9 @@ public class EggSortScreen extends ScreenAdapter {
         chickenWhite = new Chicken(Constants.CHICKEN_WHITE_POSITION, Enums.ChickenColor.WHITE);
         chickenBrown = new Chicken(Constants.CHICKEN_BROWN_POSITION, Enums.ChickenColor.BROWN);
         //note that level must be set before initializing buckets since they use it to calc goal
-        bucketLeft = new Bucket(Constants.BUCKET_LEFT_POSITION, Enums.EggType.WHITE, 12);
-        bucketMiddle = new Bucket(Constants.BUCKET_MIDDLE_POSITION, Enums.EggType.BROWN, 12);
-        bucketRight = new Bucket(Constants.BUCKET_RIGHT_POSITION, Enums.EggType.CHICK, 12);
+        bucketLeft = new Bucket(Constants.BUCKET_LEFT_POSITION, Enums.EggType.WHITE);
+        bucketMiddle = new Bucket(Constants.BUCKET_MIDDLE_POSITION, Enums.EggType.BROWN);
+        bucketRight = new Bucket(Constants.BUCKET_RIGHT_POSITION, Enums.EggType.CHICK);
         leftValve = new Valve(Constants.VALVE_LEFT_POSITION, Enums.EggType.WHITE);
         rightValve = new Valve(Constants.VALVE_RIGHT_POSITION, Enums.EggType.BROWN);
         /*
@@ -79,10 +79,12 @@ public class EggSortScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(buttons);
         scoreText = new ScoreText();
         gameState = Enums.GameState.PLAYING_NORMAL;
-        lastEggSpawnedTime = TimeUtils.nanoTime();
+        //lastEggSpawnedTime = TimeUtils.nanoTime();
         preferences = Gdx.app.getPreferences(Constants.PREFERENCES_FILE_NAME);
         highScore = preferences.getLong(Constants.PREF_KEY_HIGH_SCORE);
         highLevel = preferences.getInteger(Constants.PREF_KEY_HIGH_LEVEL);
+        Assets.singleton.sounds.playSound(Assets.singleton.sounds.newLevel);
+        gotoLevel(level);
     }
 
     @Override
@@ -181,9 +183,27 @@ public class EggSortScreen extends ScreenAdapter {
         this.level = level;
         combo = 0;
         eggs.clear();
-        bucketLeft.reset(12);
-        bucketMiddle.reset(12);
-        bucketRight.reset(12);
+        int caughtEggsGoal;
+        if (level <= 6) {
+            caughtEggsGoal = 12;
+        } else if (level <= 12) {
+            caughtEggsGoal = 24;
+        } else if (level <= 18) {
+            caughtEggsGoal = 36;
+        } else if (level <= 24) {
+            caughtEggsGoal = 48;
+        } else {
+            caughtEggsGoal = 60;
+        }
+        int startingEggs;
+        if (level * Constants.BUCKET_GOAL_PER_LEVEL % 12 == 0) {
+            startingEggs = 0;
+        } else {
+            startingEggs = 12 - (level * Constants.BUCKET_GOAL_PER_LEVEL % 12);
+        }
+        bucketLeft.reset(startingEggs, caughtEggsGoal);
+        bucketMiddle.reset(startingEggs, caughtEggsGoal);
+        bucketRight.reset(startingEggs, caughtEggsGoal);
         levelChangeStartedTime = TimeUtils.nanoTime();
         gameState = Enums.GameState.STARTING_NEXT_LEVEL;
     }
@@ -230,13 +250,13 @@ public class EggSortScreen extends ScreenAdapter {
                 //increment eggcount on the bucket that matches the fellthru enum and play a sound if it's now full TODO refactor
                 switch (egg.fellThru) {
                     case LEFT_VALVE:
-                        if (bucketLeft.caughtEgg()) Assets.singleton.sounds.playSound(Assets.singleton.sounds.full);
+                        bucketLeft.caughtEgg();
                         break;
                     case RIGHT_VALVE:
-                        if (bucketMiddle.caughtEgg()) Assets.singleton.sounds.playSound(Assets.singleton.sounds.full);
+                        bucketMiddle.caughtEgg();
                         break;
                     case END:
-                        if (bucketRight.caughtEgg()) Assets.singleton.sounds.playSound(Assets.singleton.sounds.full);
+                        bucketRight.caughtEgg();
                         break;
                 }
 
